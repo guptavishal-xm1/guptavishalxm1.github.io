@@ -1,288 +1,154 @@
+
 <!DOCTYPE html>
+
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Bing Automate Searches</title>
-		<script
-			src="https://code.jquery.com/jquery-3.7.1.min.js"
-			integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-			crossorigin="anonymous"></script>
-	</head>
-	<style>
-		* {
-			border: none;
-			box-sizing: border-box;
-			margin: 0;
-			padding: 0;
-			outline: none;
-		}
-		main {
-			align-items: center;
-			background: #ffffff;
-			display: flex;
-			height: 160px;
-			gap: 10px;
-			justify-content: center;
-		}
-		input {
-            background-color: black;
+
+<head>
+
+
+ <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2216437895384685');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2216437895384685&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+
+    <meta charset="UTF-8">
+    <title>SARA TIPPERS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        main {
+            width: 100vw;
+            height: 100vh;
+            background-image: url("./IMG-20240729-WA0004.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: rgba(0, 0, 0, 0.75);
+            background-blend-mode: overlay;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            padding: 8rem 2rem;
+        }
+
+        h3 {
             color: white;
-            border: 2px solid #aaa;
-            border-radius: 12%;
-			font-size: 20px;
-			padding: 8px;
-			width: fit-content;
-		}
-		#input {
-			text-align: right;
-			width: 16%;
-		}
-		section {
-			padding: 10vw;
-		}
-		#phone {
-			aspect-ratio: 9/18;
-			border: 10px solid #000000;
-			border-radius: 20px;
-			gap: 0;
-			overflow: hidden;
-			width: 100%;
-		}
-		iframe {
-			aspect-ratio: 9/17;
-			width: 100%;
-		}
-		#searchbar {
-			aspect-ratio: 9/1.5;
-			align-items: center;
-			background: #f0f0f0;
-			border: 2px solid #aaa;
-			display: flex;
-			height: inherit;
-			justify-content: center;
-			padding: 5px 5px 10px;
-			width: inherit;
-		}
-		#searchbar input#search {
-			width: 80%;
-		}
-        #support{
-            align-items: center;
-            background: #111;
-            color: #f0f0f0;
-            display: flex;
-            font-weight: 600;
-            height: 15vw;
-            justify-content: center;
-            width: 100%;
+            font-size: 2vh;
         }
-        button{
-            background: #6f4e37;
+        h2 {
             color: white;
-            border: 2px solid #aaa;
-            border-radius: 5px;
-            color: #ffffff;
-            cursor: pointer;
-            font-size: 20px;
-            padding: 10px;
+            font-size: 3vh;
         }
-        button:hover{
-            background: #ffffff;
-            color: #6f4e37;
+        a {
+            color: white;
+            font-size: 2vh;
         }
-        @keyframes blink{
-            to {
-          visibility: hidden;
+        h1 {
+            color: white;
+            font-size: 6vh;
+            font-weight: 700;
+            font-family: Georgia, 'Times New Roman', Times, serif;
         }
-      }
-      @-webkit-keyframes blink-animation {
-        to {
-          visibility: hidden;
+
+        p {
+            color: white;
+            font-size: 3vh;
         }
+
+        .countdown {
+            color: red;
+            animation: blink-animation 2s infinite;
         }
-        a{
-            animation: blink 3s linear infinite;
-            color: inherit;
-            text-decoration: none;
+
+        @keyframes blink-animation {
+            0% {
+                color: red;
+            }
+
+            50% {
+                color: white;
+            }
+
+            100% {
+                color: red;
+            }
         }
-	</style>
-	<body>
-		<main>
-			<input type="number" id="input" value="10" min="0" max="50" />
-			<input type="submit" value="Start Searching" id="trigger" />
-            <button><a href="/buymecoffee.html">Buy me a coffee</a></button>
-		</main>
-		<section>
-			<div id="phone">
-				<iframe
-					
-					frameborder="0"></iframe>
-				<div id="searchbar">
-					<input type="text" id="search" />
-					<input type="submit" value="Go" id="go" />
-				</div>
-			</div>
-		</section>
-	</body>
-	<script>
-		const searchQueries = [
-			"How to lose weight",
-            "How to gain weight",
-            "How to stay fit",
-            "How to stay healthy",
-            "How to stay happy",
-            "How to stay motivated",
-            "How to stay focused",
-            "How to stay positive",
-			"Best smartphone reviews",
-			"Global warming effects",
-			"Learn coding online",
-            "Learn web development",
-            "Learn app development",
-            "Learn game development",
-            "Learn machine learning",
-            "Learn artificial intelligence",
-            "Learn data science",
-			"Top movie releases",
-			"Travel destinations 2023",
-			"Healthy dinner recipes",
-			"Breaking news today",
-			"DIY home improvement",
-			"Space exploration latest",
-			"Funny cat videos",
-			"Social media marketing tips",
-			"Latest fashion trends",
-			"Financial planning for beginners",
-			"Upcoming video games",
-			"Job interview tips",
-			"Mindfulness meditation techniques",
-			"Political news updates",
-			"Learn a new language",
-			"Tech gadgets 2022",
-			"Popular book recommendations",
-			"Best budget travel destinations",
-			"How to start a small business",
-			"Healthy breakfast ideas",
-			"Home workout routines",
-			"Virtual reality technology",
-			"Current stock market trends",
-			"Photography tips for beginners",
-			"Healthy snack recipes",
-			"Effective time management strategies",
-			"Climate change solutions",
-			"New music releases",
-			"Cryptocurrency investment guide",
-			"Mind-bending riddles",
-			"Natural remedies for common ailments",
-			"Science behind dreams",
-			"DIY garden projects",
-			"Educational podcasts 2022",
-			"Artificial intelligence applications",
-			"SpaceX latest achievements",
-			"Motivational quotes for success",
-			"Tech trends for the future",
-			"Technology",
-            "Science",
-			"Health",
-			"Travel",
-			"Coding",
-			"Movies",
-			"Recipes",
-			"News",
-			"DIY",
-			"Space",
-			"Cats",
-			"Fashion",
-			"Finance",
-			"Gaming",
-			"Interviews",
-			"Meditation",
-			"Politics",
-			"Language",
-			"Gadgets",
-			"Books",
-			"Business",
-			"Workout",
-			"Reality",
-			"Stocks",
-			"Photography",
-			"Podcasts",
-			"Riddles",
-			"Remedies",
-			"Dreams",
-			"Garden",
-			"Podcasts",
-			"AI",
-			"Motivation",
-		];
 
-		// Access a random search query
-		function getRandom() {
-			return encodeURIComponent(
-				searchQueries[Math.floor(Math.random() * searchQueries.length)],
-			);
-		}
+        button {
 
-		const input = $("#input");
-		const trigger = $("#trigger");
-		const search = $("#search");
-		const go = $("#go");
-		let searchesToPerform;
-		input.on("input", function () {
-			searchesToPerform = input.val();
-			if (searchesToPerform == undefined || searchesToPerform == "") {
-				input.val(0);
-				searchesToPerform = 0;
-			}
-			console.log(searchesToPerform);
-		});
-		trigger.on("click", function () {
-			searchesToPerform = parseInt(input.val()) + 1;
-			if (searchesToPerform == undefined || searchesToPerform == "") {
-				input.val(0);
-				searchesToPerform = 0;
-				alert("Value is 0");
-			}
-			console.log(searchesToPerform);
-			async function performSearches() {
-				for (let i = 0; i < searchesToPerform; i++) {
-					const term = getRandom();
-					console.log(term);
-                    if (i != (parseInt(searchesToPerform) - 1)){
-					const urlToSearch =
-						"https://www.bing.com/?q=" + term + "&form=QBLH";
-					search.val(urlToSearch);
-                    } else {
-                        search.val("");
-                        alert("Searches completed!")
-                    }
+            padding: 0.5em 0.8em;
+            border-radius: 10px;
+            border: none;
+            background-color: #0088cc;
+            font-size: 3vh;
+            color: #fff;
+        }
 
-					await new Promise((resolve) => {
-						setTimeout(function () {
-							go.click();
-							resolve();
-						}, 100);
-					});
+        svg {
+            margin-bottom: 0.25em;
+        }
+    </style>
+</head>
 
-					const randomDelay =
-						Math.floor(Math.random() * (20000 - 12000 + 1)) + 12000;
+<body style="background-color: black">
+    <main>
+        <h2 class="mb-5"> CRICKET PREDICTION KI QUEEN  <i class="fa fa-telegram" style="font-size:48px"></i></h2>
 
-					await new Promise((resolve) => {
-						setTimeout(function () {
-							console.log("searched: " + i);
-							resolve();
-						}, randomDelay);
-					});
-				}
-			}
+        <h1 class="mb-5">👑 SARA TIPPERS 👑</h1>
+        <button class="mb-5" onclick="redirectToLink()"><svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+                fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16">
+                <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" />
+            </svg> JOIN NOW</button>
+        <h3 class="mb-5">✌️MOST TRUST & OLDEST ✌️</h3>
+        <h3 class="mb-5">✔️TNPL ALL MATCH PASS✔️</h3>
+        <h3 class="mb-5" >🤝JALDI JUDO OR LAKHO KAMAO 🤝</h3>
+        <p class="mb-5">Free joining ends in
+            <span id="countdown" class="countdown"></span>
+        </p>
+        <button class="mb-5"  onclick="redirectToLink()">Join Now For Free</button>
+        <br />
+        <br />
+        <h3 class="mb-5">🤝💯 SARA TIPPERS KE SATH MATLAB JEET KE SATH 💯</h3>
 
-			// Call the function
-			performSearches();
-		});
-		go.on("click", function () {
-			const url = search.val();
-			$("iframe").attr("src", url);
-		});
-	</script>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script>
+        function countdown() {
+            var seconds = 60;
+            var countdownElement = document.getElementById("countdown");
+            countdownElement.innerText = seconds;
+            var timer = setInterval(function () {
+                seconds--;
+                countdownElement.innerText = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    // countdownElement.innerText = 0;
+                }
+            }, 1000);
+        }
+        function redirectToLink() {
+            window.location.href = "https://t.me/+yqNY7PbHMGIxZWU1";
+        }
+        // Start the countdown when the page loads
+        window.onload = countdown;
+    </script>
+</body>
+
 </html>
